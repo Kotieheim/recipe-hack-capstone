@@ -9,24 +9,36 @@
     </head>
 <body>
     <section class="container">
-        <h1>Recipe Title Here</h1>
-        <form action="#" class="js-search-form">
-            <input type="text" placeholder="Ingredients, Dish or whatever you're feeling!" required>
-            <button type="submit">Lets eat!</button>
+        <header>
+            <h1>Down Right Tasty</h1>
+        </header>
+
+        <form action="#" class="form">
+            <input type="text" class="gen-search" placeholder="Name of a recipe you would like!" required>
+
+        <h3>Allergic to an ingredient? filter them here!</h3>
+        <fieldset>
+            <legend>Recipes without: </legend>
+            <div class="exc-inputs">
+                <input type="text" class="excIngred" placeholder="peanuts, dairy, etc...">
+            </div>
+            <button class="addExc" value="+">+ ingredient</button>
+        </fieldset>
         </form>
+
+        <p class="error-message"></p>
+        <button type="button" class="go-back hidden">Back to list</button>
+
+        <section role="results" class="results">
+            <div class=" results-list hidden">
+                <h2>Results</h2>
+            </div>
+            <div class="result-details hidden"></div>
+            <button type="button" class="go-back hidden">Back to list</button>
+ 
+        </section>
+
     </section>
-<main>
-    <section class="js-output">
-        <div class="results">
-        </div>
-
-        <h2>Whatcha makin?</h2>
-        <div class="results-written">
-
-        </div>
-    </section>
-
-</main>
 <script src="index.js"></script>
 </body>
 
