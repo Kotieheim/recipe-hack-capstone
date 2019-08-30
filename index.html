@@ -17,14 +17,19 @@
             <label for="search">Search Recipes</label>
             <input type="text" class="gen-search" placeholder="Name of a recipe you would like!" required>
 
-        <h3>Allergic to an ingredient? filter them here!</h3>
+        <h3>Allergic or don't want an ingredient? filter them here!</h3>
         <fieldset>
             <legend>Recipes without: </legend>
             <div class="exc-inputs">
                 <input type="text" class="excIngred" placeholder="peanuts, dairy, etc...">
             </div>
             <button class="addExc" value="+">+ ingredient</button>
+
         </fieldset>
+
+        <input type="submit" class="ingredients" value="Search recipes">
+            <button type="click" class="reset" value="New search">New search</button>
+            
         </form>
 
         <p class="error-message"></p>
