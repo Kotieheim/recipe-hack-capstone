@@ -32,7 +32,13 @@ function excIngred() {
 }
 
 function searchRecipes(search, excludes) {
+    let params = {
+        '_app_id': apiId,
+        '_app_key': apiKey,
+        q: search,
 
+    };
+    console.log(excludes);
 }
 
 function displayResults(responseJson) {
