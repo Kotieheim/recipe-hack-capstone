@@ -4,3 +4,14 @@
     padding: 0;
 }
 
+h1 {
+    color: white;
+    background-color: black;
+    text-align: center;
+    font-size: 290%;
+}
+
+body {
+    background: url('wp3820440-healthy-food-wallpapers.jpg') no-repeat center center fixed;
+    background-size: cover;
+}
