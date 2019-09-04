@@ -21,14 +21,13 @@ function displayWrittenResult(result) {
         </h2>
         <div class="recipeIcons">
             <a href="${result.recipe.url}" target="_blank"><img src="${result.recipe.image}" class="thumbnail" title="Check this recipe"></a>
-            <div class="scroll-bar-wrap">
+            
                 <div class="ingredientItems scroll-box">
                     <p class="ingredient-ul">Ingredients for Recipe: ${makeUL(result.recipe.ingredientLines)}
                     </p>
                     </div>
-                    <div class="cover-bar"></div>
                 </div>
-                </div>
+            
                 `; 
 }
 
