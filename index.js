@@ -14,6 +14,7 @@ function getFoodData(searchTerm, callBack) {
 }
 
 function displayWrittenResult(result) {
+    $('.result-area').removeClass('hidden')
     return `
     <div class="single-result">
         <h2 class="js-result-name">
