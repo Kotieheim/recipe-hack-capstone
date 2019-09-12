@@ -13,29 +13,30 @@ function getFoodData(searchTerm, callBack) {
     $.getJSON(searchUrl, query, callBack);
 }
 
+
 function displayWrittenResult(result) {
     $('.result-area').removeClass('hidden')
     return `
     <div class="single-result">
-        <h2 class="js-result-name">
-            <a href="${result.recipe.url}" target="_blank" title="${result.recipe.label}">${result.recipe.label}</a>
-        </h2>
+    <h2 class="js-result-name">
+        <a href="${result.recipe.url}" target="_blank" title="${result.recipe.label}">${result.recipe.label}</a>
+    </h2>
         <div class="recipeIcons">
             <a href="${result.recipe.url}" target="_blank"><img src="${result.recipe.image}" class="thumbnail" title="Check this recipe"></a>
             
-                <div class="ingredientItems scroll-box">
-                    <p class="ingredient-ul">Ingredients for Recipe: ${makeUL(result.recipe.ingredientLines)}
-                    </p>
-                    </div>
-                </div>
-            
-                `; 
+        <div class="ingredientItems scroll-box">
+            <p class="ingredient-ul">Ingredients for Recipe: ${makeUL(result.recipe.ingredientLines)}
+            </p>
+        </div>
+    </div>
+    `; 
 }
 
 function displayRecipeData(data) {
-    const results = data.hits.map((item,index) => displayWrittenResult(item));
+    const results = data.hits.map((element,item,index) => console.log(element,item));
     $('.search-results-written').html(results);
-        $('.search-results-written').prop('hidden', false).html(results);
+    //     $('.search-results-written').prop('hidden', false).html(results);
+        console.log(results);
 }
 
 function makeUL(array) {
@@ -50,6 +51,7 @@ function makeUL(array) {
 }
 
 
+
 function watchSubmit() {
     $('.js-search-form').submit(event => {
         event.preventDefault();
@@ -60,7 +62,24 @@ function watchSubmit() {
         $('.result-area').show();
     });
 }
+$(document).ready(function() {
+    $('section').fadeIn(1000)
+})
+
 
 $(watchSubmit);
 
 
+// let list = '<ul>'
+
+// for (let i=0; i<responseJson.data.length; i++) {
+//   list += `
+//     <li><h3>${responseJson.data[i].fullName}</h3>
+//     <a href='${responseJson.data[i].url}'>${responseJson.data[i].url}</a>
+//     <p>${responseJson.data[i].description}</p>
+//     <p>${responseJson.data[i].directionsInfo}</p>
+//     </li>
+//     `;
+// };
+
+// list += '</ul>'
