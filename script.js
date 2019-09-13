@@ -109,38 +109,38 @@ function displayVideoRecipe(data) {
 }
 
 // Embedding ifamre youtube video
-// var tag = document.createElement('script');
+var tag = document.createElement('script');
 
-// tag.src = 'https://www.youtube.com/iframe_api';
-// var firstScriptTag = document.getElementsByTagName('script')[0];
-// firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+tag.src = 'https://www.youtube.com/iframe_api';
+var firstScriptTag = document.getElementsByTagName('script')[0];
+firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
 
-// var player;
-//       function onYouTubeIframeAPIReady() {
-//         player = new YT.Player('player', {
-//           height: '260',
-//           width: '480',
-//           videoId: 'M7lc1UVf-VE',
-//           events: {
-//             'onReady': onPlayerReady,
-//             'onStateChange': onPlayerStateChange
-//           }
-//         });
-//       }
-// function onPlayerReady(event) {
-//     event.target.playVideo();
-// }
+var player;
+      function onYouTubeIframeAPIReady() {
+        player = new YT.Player('player', {
+          height: '260',
+          width: '480',
+          videoId: 'M7lc1UVf-VE',
+          events: {
+            'onReady': onPlayerReady,
+            'onStateChange': onPlayerStateChange
+          }
+        });
+      }
+function onPlayerReady(event) {
+    event.target.playVideo();
+}
 
-// var done = false;
-// function onPlayerStateChange(event) {
-//     if (event.data == YT.playerState.PLAYING && !done) {
-//         setTimeout(stopVideo, 5000);
-//         done = true;
-//     }
-// }
-// function stopVideo() {
-//     player.stopVideo();
-// }
+var done = false;
+function onPlayerStateChange(event) {
+    if (event.data == YT.playerState.PLAYING && !done) {
+        setTimeout(stopVideo, 5000);
+        done = true;
+    }
+}
+function stopVideo() {
+    player.stopVideo();
+}
 
 
 
