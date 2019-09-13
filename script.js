@@ -30,6 +30,8 @@ function getFoodData(query) {
         app_id: apiId,
         app_key: apiKey,
         q: query,
+        from: 0,
+        to: 6,
     };
     const queryString = formatQueryParams(params)
     const url = searchUrl + '?' + queryString;
@@ -46,7 +48,7 @@ function displayRecipeData(data) {
     $('.result-area').append(`
     <div class="single-result">
     <h2 class="js-result-name">
-        <a href="${item.recipe.url}" target="_blank" title="${item.recipe.label}">${item.recipe.label}</a>
+        <a href="${item.recipe.url}" class="recipe-title" target="_blank" title="${item.recipe.label}">${item.recipe.label}</a>
     </h2>
         <div class="recipeIcons">
             <a href="${item.recipe.url}" target="_blank"><img src="${item.recipe.image}" class="thumbnail" title="Check this recipe"></a>
@@ -56,6 +58,7 @@ function displayRecipeData(data) {
             </p>
         </div>
     </div>`));
+    $('.js-output').removeClass('hidden');
 }
 
 function makeUL(array) {

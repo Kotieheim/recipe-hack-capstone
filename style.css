@@ -44,7 +44,7 @@ body {
   box-shadow: 2px 4px black;
   border-radius: 5px;
 }
-.js-search-form button {
+.js-search-form .button {
     display: block;
     padding: 8px;
     margin: 12px auto;
@@ -54,7 +54,7 @@ body {
     background-color: rgb(235, 235, 235);
 }
 
-button:hover {
+.button:hover {
     cursor: pointer;
     background-color: rgb(129, 129, 129);
 }
@@ -66,10 +66,15 @@ h2 {
 }
 
 .result-area {
-    margin: 0 auto;
+    display: flex;
+    flex-wrap: wrap;
+    align-content: center;
+    justify-content: space-around;
+    margin: 10px auto;
     background-color: rgba(19, 3, 3, 0.8);
     border-radius: 20px; 
     /* display: block; */
+    padding:15px;
 }
 
 .thumbnail {
@@ -80,16 +85,14 @@ h2 {
     margin: 5px;
 }
 
-.search-results-written {
-    display: flex;
-    justify-content: space-evenly;
-    flex-wrap: wrap;
-    flex-direction: row;
+.single-result a{
+    height: 30px;
+}
+/* .search-results-written {
     color: #eee;
     font-size: 16px;
     padding: 12px;
-    /* background-color: rgba(255,255,255,0.8); */
-}
+} */
 
 .recipeIcons {
     text-align: center;
@@ -101,6 +104,7 @@ h2 {
     background: rgb(237,28,28);
     background: linear-gradient(313deg, rgba(237,28,28,0.6614846622242647) 0%, rgba(0,0,0,1) 100%); 
     margin: 8px;
+    padding: 10px; 
     border-radius: 5px;
     /* margin: 1%; */
 }
@@ -117,6 +121,10 @@ li {
 }
 
 p {
+    color: white;
+}
+
+.ingredient-ul {
     text-decoration: underline;
 }
 .scroll-box {
