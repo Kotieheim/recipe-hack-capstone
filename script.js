@@ -15,7 +15,7 @@ function watchSubmit() {
         // const queryTarget = $(this).find('.js-query')
         const query = $('.js-query').val();
         getFoodData(query, displayRecipeData);
-        getVideo(query, displayVideoData);
+        getVideo();
         // console.log(query);
     });
 }
@@ -49,7 +49,25 @@ function getFoodData(query) {
 
 // displays the data received from API
 function displayRecipeData(data) {
-    data.hits.forEach((item) => 
+    data.hits.forEach((item) => renderRecipeData(item))
+    data.hits.forEach((item) => getVideo(item.recipe.label))
+    // $('.result-area').append(`
+    // <div class="single-result">
+    // <h2 class="js-result-name">
+    //     <a href="${item.recipe.url}" class="recipe-title" target="_blank" title="${item.recipe.label}">${item.recipe.label}</a>
+    // </h2>
+    //     <div class="recipeIcons">
+    //         <a href="${item.recipe.url}" target="_blank"><img src="${item.recipe.image}" class="thumbnail" title="Check this recipe"></a>
+
+    //     <div class="ingredientItems scroll-box">
+    //         <p class="ingredient-ul">Ingredients for Recipe: ${makeUL(item.recipe.ingredientLines)}
+    //         </p>
+    //     </div>
+    // </div>`));
+    // $('.js-output').removeClass('hidden');
+}
+
+function renderRecipeData(item) {
     $('.result-area').append(`
     <div class="single-result">
     <h2 class="js-result-name">
@@ -62,9 +80,11 @@ function displayRecipeData(data) {
             <p class="ingredient-ul">Ingredients for Recipe: ${makeUL(item.recipe.ingredientLines)}
             </p>
         </div>
-    </div>`));
+    </div>
+    <div id="player"></div>`);
     $('.js-output').removeClass('hidden');
 }
+
 // lists out the ingredient data from API
 function makeUL(array) {
     // console.log('UL function called')
@@ -80,10 +100,10 @@ function makeUL(array) {
 const videoUrl = 'https://www.googleapis.com/youtube/v3/search';
 const apiKeyVideo = 'AIzaSyD5fnrdH3PBx-eYXg7o69bKmnlf73nqFTI';
 
-function getVideo(query) {
+function getVideo(item) {
     const params = {
         part: 'snippet',
-        q: `${query} recipe`,
+        q: `${item} recipe`,
         key: apiKeyVideo,
         maxResults: 1,
         type: 'video',
@@ -95,41 +115,27 @@ function getVideo(query) {
 
     fetch(url)
     .then(response => response.json()
-    .then(response => displayVideoData(response))
+    .then(response => displayVideoRecipe(response))
     .catch (err => {
         $('#js-error-message').text(`Something went wrong: ${err.message}`);
     }));
 }
-function onYouTubeIframeAPIReady() {
-    player = new YT.Player('player', {
-      height: '390',
-      width: '640',
-      videoId: '',
-      events: {
-        'onReady': onPlayerReady,
-        'onStateChange': onPlayerStateChange
-      }
-    });
-  }
-function displayVideoData(data) {
-
+function displayVideoRecipe(data) {
+    data.items.forEach((item => console.log(item.id.videoId)))
+    // data.items.forEach((item => (function onYoutubeIframeAPIReady() {
+    //     var player; 
+    //     player = new YT.Player('player', {
+    //         height: '390',
+    //         width: '640',
+    //         videoId: `${item.id.videoId}`,
+    //         events: {
+    //             'onReady': onPlayerReady,
+    //             'onStateChange': onPlayerStateChange,
+    //         }
+    //     })
+    // })))
+    // console.log(player);
 }
-// function displayVideoRecipe(data) {
-//     console.log('video recipe function');
-//     data.items.forEach((items => (function onYoutubeIframeAPIReady(player) {
-//         var player = new YT.Player('player', {
-//             height: '390',
-//             width: '640',
-//             videoId: `${items.id.videoId}`,
-//             events: {
-//                 'onReady': onPlayerReady,
-//                 'onStateChange': onPlayerStateChange,
-//             }
-//         })
-//     })))
-//     console.log(player);
-// }
-
 
 
 
