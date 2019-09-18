@@ -15,10 +15,9 @@ function watchSubmit() {
         // const queryTarget = $(this).find('.js-query')
         const query = $('.js-query').val();
         getFoodData(query, displayRecipeData);
-        getVideo(query, displayVideoRecipe);
-        console.log(query);
+        getVideo(query, displayVideoData);
+        // console.log(query);
     });
-    console.log('Form submit');
 }
 
 function formatQueryParams(params) {
@@ -37,7 +36,7 @@ function getFoodData(query) {
     };
     const queryString = formatQueryParams(params)
     const url = searchUrl + '?' + queryString;
-    console.log(params);
+    // console.log(params);
 
     fetch(url)
     .then(response => response.json())
@@ -45,6 +44,8 @@ function getFoodData(query) {
     .catch(err => 
         $('#js-error-message').text(`Something went wrong: ${err.message}`));
 }
+
+
 
 // displays the data received from API
 function displayRecipeData(data) {
@@ -64,7 +65,6 @@ function displayRecipeData(data) {
     </div>`));
     $('.js-output').removeClass('hidden');
 }
-
 // lists out the ingredient data from API
 function makeUL(array) {
     // console.log('UL function called')
@@ -94,55 +94,41 @@ function getVideo(query) {
     console.log(url);
 
     fetch(url)
-    .then(response => response.json())
-    .then(responseJson => displayVideoRecipe(responseJson))
+    .then(response => response.json()
+    .then(response => displayVideoData(response))
     .catch (err => {
         $('#js-error-message').text(`Something went wrong: ${err.message}`);
-    });
+    }));
 }
-
-
-function displayVideoRecipe(data) {
-    console.log('video recipe function');
-    console.log(data);
-    data.items.forEach((items => console.log(items.id.videoId)));
-}
-
-// Embedding ifamre youtube video
-var tag = document.createElement('script');
-
-tag.src = 'https://www.youtube.com/iframe_api';
-var firstScriptTag = document.getElementsByTagName('script')[0];
-firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
-
-var player;
-      function onYouTubeIframeAPIReady() {
-        player = new YT.Player('player', {
-          height: '260',
-          width: '480',
-          videoId: 'M7lc1UVf-VE',
-          events: {
-            'onReady': onPlayerReady,
-            'onStateChange': onPlayerStateChange
-          }
-        });
+function onYouTubeIframeAPIReady() {
+    player = new YT.Player('player', {
+      height: '390',
+      width: '640',
+      videoId: '',
+      events: {
+        'onReady': onPlayerReady,
+        'onStateChange': onPlayerStateChange
       }
-function onPlayerReady(event) {
-    event.target.playVideo();
-}
+    });
+  }
+function displayVideoData(data) {
 
-var done = false;
-function onPlayerStateChange(event) {
-    if (event.data == YT.playerState.PLAYING && !done) {
-        setTimeout(stopVideo, 5000);
-        done = true;
-    }
 }
-function stopVideo() {
-    player.stopVideo();
-}
-
-
+// function displayVideoRecipe(data) {
+//     console.log('video recipe function');
+//     data.items.forEach((items => (function onYoutubeIframeAPIReady(player) {
+//         var player = new YT.Player('player', {
+//             height: '390',
+//             width: '640',
+//             videoId: `${items.id.videoId}`,
+//             events: {
+//                 'onReady': onPlayerReady,
+//                 'onStateChange': onPlayerStateChange,
+//             }
+//         })
+//     })))
+//     console.log(player);
+// }
 
 
 
