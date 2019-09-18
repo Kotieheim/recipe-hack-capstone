@@ -121,24 +121,15 @@ function getVideo(item) {
     }));
 }
 function displayVideoRecipe(data) {
-    data.items.forEach((item => console.log(item.id.videoId)))
-    // data.items.forEach((item => (function onYoutubeIframeAPIReady() {
-    //     var player; 
-    //     player = new YT.Player('player', {
-    //         height: '390',
-    //         width: '640',
-    //         videoId: `${item.id.videoId}`,
-    //         events: {
-    //             'onReady': onPlayerReady,
-    //             'onStateChange': onPlayerStateChange,
-    //         }
-    //     })
-    // })))
-    // console.log(player);
+    data.items.forEach((item => displayVideo(item.id.videoId)))
 }
 
 
-
+function displayVideo(myId) {
+    $('#player').html(`<iframe id="player" type="text/html" width="640" height="390"
+  src="http://www.youtube.com/embed/${myId}?enablejsapi=1"
+  frameborder="0"></iframe>`)
+}
 
 
 
