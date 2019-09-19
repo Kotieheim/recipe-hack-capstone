@@ -79,9 +79,9 @@ function renderRecipeData(item) {
         <div class="ingredientItems scroll-box">
             <p class="ingredient-ul">Ingredients for Recipe: ${makeUL(item.recipe.ingredientLines)}
             </p>
+            <div id='player'></div>
         </div>
-    </div>
-    <div id="player"></div>`);
+    </div>`);
     $('.js-output').removeClass('hidden');
 }
 
@@ -126,7 +126,7 @@ function displayVideoRecipe(data) {
 
 
 function displayVideo(myId) {
-    $('#player').html(`<iframe id="player" type="text/html" width="640" height="390"
+    $('.single-result').append(`<iframe id="player" type="text/html" width="640" height="390"
   src="http://www.youtube.com/embed/${myId}?enablejsapi=1"
   frameborder="0"></iframe>`)
 }
