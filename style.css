@@ -20,12 +20,29 @@ h1 {
     margin: 10% 5%;
     padding: 8px;
     border-radius: 8px;
-    /* width: 600px; */
     text-shadow:
     -1.5px -1.5px 0 #000,  
      1.5px -1.5px 0 #000,
      -1.5px 1.5px 0 #000,
       1.5px 1.5px 0 #000;
+}
+
+.description {
+    background-color: rgb(0, 0, 0, 0.6);
+    text-align: center;
+    font-size: 16px;
+    border-left: 5px solid white;
+    border-bottom: 5px solid white;
+    border-top: 5px solid black;
+    border-right: 5px solid black;
+    margin: 16px auto;
+    padding: 8px;
+    text-shadow:
+    -1.5px -1.5px 0 #000,  
+     1.5px -1.5px 0 #000,
+     -1.5px 1.5px 0 #000,
+      1.5px 1.5px 0 #000;
+      width: 280px;
 }
 
 body {
@@ -34,7 +51,7 @@ body {
     background-size: cover;
 }
 
-/* .js-search-form label, */
+
 .js-search-form input {
   display: block;
   padding: 1%;
@@ -65,16 +82,20 @@ h2 {
     color: white;
 }
 
+iframe {
+    padding: 12px 0;
+}
+
+
 .result-area {
     display: flex;
     flex-wrap: wrap;
     align-content: center;
     justify-content: space-around;
-    margin: 10px auto;
+    margin: 10px;
     background-color: rgba(19, 3, 3, 0.8);
     border-radius: 20px; 
-    /* display: block; */
-    padding:15px;
+    padding: 15px;
 }
 
 .thumbnail {
@@ -88,11 +109,6 @@ h2 {
 .single-result a{
     height: 30px;
 }
-/* .search-results-written {
-    color: #eee;
-    font-size: 16px;
-    padding: 12px;
-} */
 
 .recipeIcons {
     text-align: center;
@@ -100,20 +116,16 @@ h2 {
 
 .single-result {
     width: 300px;
-    height: auto;
+    height: 580px;
     background: rgb(237,28,28);
     background: linear-gradient(313deg, rgba(237,28,28,0.6614846622242647) 0%, rgba(0,0,0,1) 100%); 
     margin: 8px;
     padding: 10px; 
     border-radius: 5px;
-    /* margin: 1%; */
 }
 
 ul {
     list-style: circle;
-    text-align: left;
-    /* line-height: 24pt; */
-    /* text-decoration: underline; */
 }
 
 li {
@@ -130,7 +142,7 @@ p {
 .scroll-box {
     scrollbar-color: white;
     width: 100%;
-    height: 225px;
+    height: 300px;
     overflow-y: scroll;
     border: 2px dashed black;
     padding: 8px;
@@ -151,17 +163,6 @@ a:hover {
     color: black;
 }
 
-footer {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    position: absolute;
-    bottom: 0;
-    width: 100%;
-    height: 2.5rem;
-    background-color: #212121;
-    padding: 1%;
-  }
 
 
 
@@ -171,15 +172,24 @@ footer {
         font-size: 90px;
         width: 600px;
     }
+    .description {
+        font-size: 20px;
+        width: 400px;
+    }
 }
 
 @media screen and (min-width: 970px) {
-    /* .single-result {
-        width: 300x;
-    } */
     h1 {
         width: 600px;
         margin: 10% auto;
+    }
+    .result-area {
+        margin: 16px 25px;
+    }
+    .description {
+        font-size: 22px;
+        width: 500px;
+        margin: 20px auto;
     }
 }
 
@@ -195,6 +205,14 @@ footer {
     .js-search-form input {
         width: 300px;
     }
+    .result-area {
+        margin: 16px 36px;
+    }
+    .description {
+        font-size: 24px;
+        width: 600px;
+        margin: 30px auto;
+    }
 }
 
 
@@ -202,6 +220,7 @@ footer {
     .single-result {
         margin: 8px 5%;
         width: 360px;
+        height: 625px;
     }
     .thumbnail {
         width: 240px;
