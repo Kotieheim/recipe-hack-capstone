@@ -7,7 +7,6 @@ const apiId = "e4a09154";
 function watchSubmit() {
   $(".js-search-form").submit(event => {
     event.preventDefault();
-    console.log("button press");
     const query = $(".js-query").val();
     getFoodData(query);
     getVideo();
@@ -33,7 +32,6 @@ async function getFoodData(query) {
   const url = searchUrl + "?" + queryString;
 
   const responseJson = await fetch(url).then(response => response.json());
-  console.log(responseJson)
 
   const promises = responseJson.hits.map(item => getVideo(item.recipe.label))
 
@@ -42,12 +40,10 @@ async function getFoodData(query) {
   responseJson.hits.forEach((item, index) => {
     const video = videoIds[index]
     const videoId = video.items[0].id.videoId
-    console.log(video)
 
     renderRecipeData(item, videoId)
   });
 
-  console.log('VIOE', videoIds)
 }
 
 function renderRecipeData(item, videoId) {
@@ -96,8 +92,7 @@ function makeUL(array) {
     };
     const queryString = formatQueryParams(params);
     const url = videoUrl + "?" + queryString;
-    console.log(params);
-    console.log(url);
+
   
     return fetch(url).then(response => response.json())
   }
