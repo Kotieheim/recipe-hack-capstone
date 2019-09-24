@@ -67,7 +67,7 @@ function renderRecipeData(item, videoId) {
             </p>
             <p>Recipe Video:</p>
               <iframe id="player" type="text/html" width="240" height="230"
-              src="http://www.youtube.com/embed/${videoId}?enablejsapi=1"
+              src="https://www.youtube.com/embed/${videoId}?enablejsapi=1"
               frameborder="0"></iframe>
         </div>
     </div>`);
