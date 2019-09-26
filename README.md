@@ -9,7 +9,7 @@ https://kotieheim.github.io/recipe-hack-capstone/
 
 <img src="screenshots/homepage.png" >
 
-<img src="screenshots/recipeshots.png" >
+<img src="screenshots/recipeshot.png" >
 
 
 ## Summary:
