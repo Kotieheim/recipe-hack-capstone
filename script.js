@@ -4,15 +4,20 @@ const searchUrl = "https://api.edamam.com/search";
 const apiKey = "dfdeff1d32e1493b08689cc95a11b623";
 const apiId = "e4a09154";
 
+// This takes what the user types into the search bar and uses the query to fetch
+// data from the Edamam API as well as YouTubes API.
 function watchSubmit() {
   $(".js-search-form").submit(event => {
     event.preventDefault();
     const query = $(".js-query").val();
     getFoodData(query);
     getVideo();
+    $('.result-area').empty();
   });
 }
 
+
+// a function that formats the paramaters provided for the fetched API's.
 function formatQueryParams(params) {
   const queryItems = Object.keys(params).map(
     key => `${encodeURIComponent(key)}=${encodeURIComponent(params[key])}`
@@ -20,6 +25,11 @@ function formatQueryParams(params) {
   return queryItems.join("&");
 }
 
+
+// this function fetches the data from the Edamam API and lets me use
+// that data to display a thumbnail, link and a ingredients. It also
+// takes the returned title of the recipe's and lets me use that as a 
+// search query for the getVideo function, which is a call to the YouTube API.
 async function getFoodData(query) {
   const params = {
     app_id: apiId,
@@ -46,6 +56,7 @@ async function getFoodData(query) {
 
 }
 
+// function to recipe the data retrieved from both Edamam and YouTube APIs.
 function renderRecipeData(item, videoId) {
   $(".result-area").append(`
     <div class="single-result">
@@ -70,7 +81,7 @@ function renderRecipeData(item, videoId) {
   $(".js-output").removeClass("hidden");
 }
 
-
+// This is what's used to list out the retrieved ingredients from Edamam.
 function makeUL(array) {
     let list = "<ul>";
     for (let i = 0; i < array.length; i++) {
@@ -81,7 +92,8 @@ function makeUL(array) {
   
   const videoUrl = "https://www.googleapis.com/youtube/v3/search";
   const apiKeyVideo = "AIzaSyD5fnrdH3PBx-eYXg7o69bKmnlf73nqFTI";
-  
+  // The fetch call to YouTube API to add an iframe video embedded at the
+  // bottom of the ingredient list.
   function getVideo(item) {
     const params = {
       part: "snippet",
@@ -98,8 +110,9 @@ function makeUL(array) {
   }
   
 
-  
+  // method watching the submit form once the page loads.
   $(document).ready(function() {
+    $('.js-query').val('')
     $("section").fadeIn(1000);
     $(watchSubmit);
   });
