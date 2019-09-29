@@ -13,6 +13,7 @@ function watchSubmit() {
     getFoodData(query);
     getVideo();
     $('.result-area').empty();
+    $('.loading').css('display', 'block')
   });
 }
 
@@ -46,20 +47,21 @@ async function getFoodData(query) {
   const promises = responseJson.hits.map(item => getVideo(item.recipe.label))
 
   const videoIds = await Promise.all(promises)
+  $('.loading').css('display', 'none')
 
-  responseJson.hits.forEach((item, index) => {
+    const html = responseJson.hits.map((item, index) => {
     const video = videoIds[index]
     const videoId = video.items[0].id.videoId
 
-    renderRecipeData(item, videoId)
+    return renderRecipeData(item, videoId)
   });
-
+  $(".js-output").removeClass("hidden");
+  $(".result-area").append(html)
 }
 
 // function to recipe the data retrieved from both Edamam and YouTube APIs.
 function renderRecipeData(item, videoId) {
-  $(".result-area").append(`
-    <div class="single-result">
+  return `<div class="single-result">
     <h2 class="js-result-name">
         <a href="${
           item.recipe.url}" class="recipe-title" target="_blank" title="${item.recipe.label}">${item.recipe.label}</a>
@@ -77,8 +79,7 @@ function renderRecipeData(item, videoId) {
               src="https://www.youtube.com/embed/${videoId}?enablejsapi=1"
               frameborder="0"></iframe>
         </div>
-    </div>`);
-  $(".js-output").removeClass("hidden");
+    </div>`;
 }
 
 // This is what's used to list out the retrieved ingredients from Edamam.
@@ -91,7 +92,7 @@ function makeUL(array) {
   }
   
   const videoUrl = "https://www.googleapis.com/youtube/v3/search";
-  const apiKeyVideo = "AIzaSyD5fnrdH3PBx-eYXg7o69bKmnlf73nqFTI";
+  const apiKeyVideo = "AIzaSyBpzOO4fJopJNcJxaTiqZgFVgHBwN6Jszk";
   // The fetch call to YouTube API to add an iframe video embedded at the
   // bottom of the ingredient list.
   function getVideo(item) {
@@ -116,3 +117,6 @@ function makeUL(array) {
     $("section").fadeIn(1000);
     $(watchSubmit);
   });
+
+
+  // AIzaSyD5fnrdH3PBx-eYXg7o69bKmnlf73nqFTI
