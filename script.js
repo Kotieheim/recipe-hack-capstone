@@ -68,11 +68,11 @@ function renderRecipeData(item, videoId) {
     </h2>
         <div class="recipeIcons">
             <a href="${item.recipe.url}" target="_blank"><img src="${
-    item.recipe.image}" class="thumbnail" title="Check this recipe"></a>
+            item.recipe.image}" class="thumbnail" title="Check this recipe"></a>
 
         <div class="ingredientItems scroll-box">
             <p class="ingredient-ul">Ingredients for Recipe: ${makeUL(
-      item.recipe.ingredientLines)}
+            item.recipe.ingredientLines)}
             </p>
             <p>Recipe Video:</p>
               <iframe id="player" type="text/html" width="240" height="230"
