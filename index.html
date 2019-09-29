@@ -1,33 +1,42 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Recipe API hack capstone</title>
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-        <link rel="stylesheet" href="style.css" type="text/css">
-        <link href="https://fonts.googleapis.com/css?family=Ubuntu&display=swap" rel="stylesheet"> 
-    </head>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Recipe API hack capstone</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="style.css" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Ubuntu&display=swap" rel="stylesheet">
+</head>
+
 <body>
 
-<section class="hidden">
-    <h1>Down Right Tasty</h1>
-    <h2 class="description">Here you can type a dish and it will bring you up to 6 results, make sure to scroll to the bottom of the ingredients for a video of the recipe!</h2>
-    <form action="#" class="js-search-form">
-        <input type="text" placeholder="Soup, Steak or whatever" class="js-query" required>
-        <input class="button" type="submit" value="Search">
-        <div style="display: none;" class="lds-ring loading"><div></div><div></div><div></div><div></div></div>
-    </form>
-</section>
-
-
-<main class="hidden js-output">
-    <section class="result-area hidden">
-
+    <section class="hidden">
+        <h1>Down Right Tasty</h1>
+        <h2 class="description">Here you can type a dish and it will bring you up to 6 results, make sure to scroll to
+            the bottom of the ingredients for a video of the recipe!</h2>
+        <form action="#" class="js-search-form">
+            <input type="text" placeholder="Soup, Steak or whatever" class="js-query" required>
+            <input class="button" type="submit" value="Search">
+            <div style="display: none;" class="lds-ring loading">
+                <div></div>
+                <div></div>
+                <div></div>
+                <div></div>
+            </div>
+        </form>
     </section>
-    <p id="js-error-message" class="error-message"></p>
 
-</main>
-<script src="script.js"></script>
+
+    <main class="hidden js-output">
+        <section class="result-area hidden">
+
+        </section>
+        <p id="js-error-message" class="error-message"></p>
+
+    </main>
+    <script src="script.js"></script>
 </body>
+
 </html>

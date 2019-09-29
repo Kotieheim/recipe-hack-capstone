@@ -12,8 +12,8 @@ function watchSubmit() {
     const query = $(".js-query").val();
     getFoodData(query);
     getVideo();
-    $('.result-area').empty();
-    $('.loading').css('display', 'block')
+    $('.result-area').empty().hide();
+    $('.loading').show()
   });
 }
 
@@ -49,14 +49,14 @@ async function getFoodData(query) {
   const videoIds = await Promise.all(promises)
   $('.loading').css('display', 'none')
 
-    const html = responseJson.hits.map((item, index) => {
+  const html = responseJson.hits.map((item, index) => {
     const video = videoIds[index]
     const videoId = video.items[0].id.videoId
 
     return renderRecipeData(item, videoId)
   });
   $(".js-output").removeClass("hidden");
-  $(".result-area").append(html)
+  $(".result-area").html(html).show()
 }
 
 // function to recipe the data retrieved from both Edamam and YouTube APIs.
@@ -64,7 +64,7 @@ function renderRecipeData(item, videoId) {
   return `<div class="single-result">
     <h2 class="js-result-name">
         <a href="${
-          item.recipe.url}" class="recipe-title" target="_blank" title="${item.recipe.label}">${item.recipe.label}</a>
+    item.recipe.url}" class="recipe-title" target="_blank" title="${item.recipe.label}">${item.recipe.label}</a>
     </h2>
         <div class="recipeIcons">
             <a href="${item.recipe.url}" target="_blank"><img src="${
@@ -72,7 +72,7 @@ function renderRecipeData(item, videoId) {
 
         <div class="ingredientItems scroll-box">
             <p class="ingredient-ul">Ingredients for Recipe: ${makeUL(
-              item.recipe.ingredientLines)}
+      item.recipe.ingredientLines)}
             </p>
             <p>Recipe Video:</p>
               <iframe id="player" type="text/html" width="240" height="230"
@@ -84,39 +84,36 @@ function renderRecipeData(item, videoId) {
 
 // This is what's used to list out the retrieved ingredients from Edamam.
 function makeUL(array) {
-    let list = "<ul>";
-    for (let i = 0; i < array.length; i++) {
-      list += `<li><p>${array[i]}</p></li>`;
-    }
-    return (list += "<ul>");
+  let list = "<ul>";
+  for (let i = 0; i < array.length; i++) {
+    list += `<li><p>${array[i]}</p></li>`;
   }
-  
-  const videoUrl = "https://www.googleapis.com/youtube/v3/search";
-  const apiKeyVideo = "AIzaSyBpzOO4fJopJNcJxaTiqZgFVgHBwN6Jszk";
-  // The fetch call to YouTube API to add an iframe video embedded at the
-  // bottom of the ingredient list.
-  function getVideo(item) {
-    const params = {
-      part: "snippet",
-      q: `${item} recipe`,
-      key: apiKeyVideo,
-      maxResults: 1,
-      type: "video"
-    };
-    const queryString = formatQueryParams(params);
-    const url = videoUrl + "?" + queryString;
+  return (list += "<ul>");
+}
 
-  
-    return fetch(url).then(response => response.json())
-  }
-  
-
-  // method watching the submit form once the page loads.
-  $(document).ready(function() {
-    $('.js-query').val('')
-    $("section").fadeIn(1000);
-    $(watchSubmit);
-  });
+const videoUrl = "https://www.googleapis.com/youtube/v3/search";
+const apiKeyVideo = "AIzaSyADNYeE3vEhmrcpr4j8kA1C_3uLPwHlt3o";
+// The fetch call to YouTube API to add an iframe video embedded at the
+// bottom of the ingredient list.
+function getVideo(item) {
+  const params = {
+    part: "snippet",
+    q: `${item} recipe`,
+    key: apiKeyVideo,
+    maxResults: 1,
+    type: "video"
+  };
+  const queryString = formatQueryParams(params);
+  const url = videoUrl + "?" + queryString;
 
 
-  // AIzaSyD5fnrdH3PBx-eYXg7o69bKmnlf73nqFTI
+  return fetch(url).then(response => response.json())
+}
+
+
+// method watching the submit form once the page loads.
+$(document).ready(function () {
+  $('.js-query').val('')
+  $("section").fadeIn(1000);
+  $(watchSubmit);
+});
