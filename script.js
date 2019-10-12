@@ -12,11 +12,12 @@ function watchSubmit() {
     const query = $(".js-query").val();
     getFoodData(query);
     getVideo();
-    $('.result-area').empty().hide();
-    $('.loading').show()
+    $(".result-area")
+      .empty()
+      .hide();
+    $(".loading").show();
   });
 }
-
 
 // a function that formats the paramaters provided for the fetched API's.
 function formatQueryParams(params) {
@@ -26,10 +27,9 @@ function formatQueryParams(params) {
   return queryItems.join("&");
 }
 
-
 // this function fetches the data from the Edamam API and lets me use
 // that data to display a thumbnail, link and a ingredients. It also
-// takes the returned title of the recipe's and lets me use that as a 
+// takes the returned title of the recipe's and lets me use that as a
 // search query for the getVideo function, which is a call to the YouTube API.
 async function getFoodData(query) {
   const params = {
@@ -44,19 +44,31 @@ async function getFoodData(query) {
 
   const responseJson = await fetch(url).then(response => response.json());
 
-  const promises = responseJson.hits.map(item => getVideo(item.recipe.label))
+  const promises = responseJson.hits.map(item => getVideo(item.recipe.label));
 
-  const videoIds = await Promise.all(promises)
-  $('.loading').css('display', 'none')
+  const videoIds = await Promise.all(promises);
+  $(".loading").css("display", "none");
 
   const html = responseJson.hits.map((item, index) => {
-    const video = videoIds[index]
-    const videoId = video.items[0].id.videoId
+    const video = videoIds[index];
+    const videoId = video.items[0].id.videoId;
 
-    return renderRecipeData(item, videoId)
+    return renderRecipeData(item, videoId);
   });
   $(".js-output").removeClass("hidden");
-  $(".result-area").html(html).show()
+  if (responseJson.hits.length === 0) {
+    return $(".result-area")
+      .html(
+        `
+    <h2>Sorry I couldn\'t find that recipe, try again!</h2>
+    `
+      )
+      .show();
+  } else {
+    $(".result-area")
+      .html(html)
+      .show();
+  }
 }
 
 // function to recipe the data retrieved from both Edamam and YouTube APIs.
@@ -64,15 +76,20 @@ function renderRecipeData(item, videoId) {
   return `<div class="single-result">
     <h2 class="js-result-name">
         <a href="${
-    item.recipe.url}" class="recipe-title" target="_blank" title="${item.recipe.label}">${item.recipe.label}</a>
+          item.recipe.url
+        }" class="recipe-title" target="_blank" title="${item.recipe.label}">${
+    item.recipe.label
+  }</a>
     </h2>
         <div class="recipeIcons">
             <a href="${item.recipe.url}" target="_blank"><img src="${
-            item.recipe.image}" class="thumbnail" title="Check this recipe"></a>
+    item.recipe.image
+  }" class="thumbnail" title="Check this recipe"></a>
 
         <div class="ingredientItems scroll-box">
             <p class="ingredient-ul">Ingredients for Recipe: ${makeUL(
-            item.recipe.ingredientLines)}
+              item.recipe.ingredientLines
+            )}
             </p>
             <p>Recipe Video:</p>
               <iframe id="player" type="text/html" width="240" height="230"
@@ -106,14 +123,12 @@ function getVideo(item) {
   const queryString = formatQueryParams(params);
   const url = videoUrl + "?" + queryString;
 
-
-  return fetch(url).then(response => response.json())
+  return fetch(url).then(response => response.json());
 }
 
-
 // method watching the submit form once the page loads.
-$(document).ready(function () {
-  $('.js-query').val('')
+$(document).ready(function() {
+  $(".js-query").val("");
   $("section").fadeIn(1000);
   $(watchSubmit);
 });
