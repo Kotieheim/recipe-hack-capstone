@@ -45,11 +45,13 @@ async function getFoodData(query) {
   const responseJson = await fetch(url).then(response => response.json());
 
   const promises = responseJson.hits.map(item => getVideo(item.recipe.label));
+  console.log(promises);
 
   const videoIds = await Promise.all(promises);
   $(".loading").css("display", "none");
 
   const html = responseJson.hits.map((item, index) => {
+    console.log(item, index);
     const video = videoIds[index];
     const videoId = video.items[0].id.videoId;
 
@@ -109,7 +111,7 @@ function makeUL(array) {
 }
 
 const videoUrl = "https://www.googleapis.com/youtube/v3/search";
-const apiKeyVideo = "AIzaSyADNYeE3vEhmrcpr4j8kA1C_3uLPwHlt3o";
+const apiKeyVideo = "AIzaSyA_8_3SlAr7cjVJfnW9kmzPSSYbQn8RXcM";
 // The fetch call to YouTube API to add an iframe video embedded at the
 // bottom of the ingredient list.
 function getVideo(item) {
