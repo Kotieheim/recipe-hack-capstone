@@ -111,7 +111,7 @@ function makeUL(array) {
 }
 
 const videoUrl = "https://www.googleapis.com/youtube/v3/search";
-const apiKeyVideo = "AIzaSyA_8_3SlAr7cjVJfnW9kmzPSSYbQn8RXcM";
+const apiKeyVideo = "AIzaSyC7421dk5yGsjW3yY1BNoFdpTUmw74dPAA";
 // The fetch call to YouTube API to add an iframe video embedded at the
 // bottom of the ingredient list.
 function getVideo(item) {
